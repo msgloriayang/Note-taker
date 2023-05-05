@@ -1,4 +1,5 @@
 const express = require("express");
+const stack = require("stack");
 
 // Import modular routers for notes
 const notesRouter = require("./notes");
