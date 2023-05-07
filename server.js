@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const util = require("util");
 const api = require("./routes/index.js");
-const stack = require("stack");
+// const stack = require("stack");
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
