@@ -1,5 +1,4 @@
 const notes = require("express").Router();
-// const stack = require("stack");
 const { readFromFile, readAndAppend } = require("../helpers/fsutils");
 
 // // GET route for showing notes
