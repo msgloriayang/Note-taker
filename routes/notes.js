@@ -1,12 +1,10 @@
 const notes = require("express").Router();
-const { readFromFile, readAndAppend } = require("../helpers/fsutils");
+const { readFromFile, readAndAppend } = require("../helpers/utils");
 
-// // GET route for showing notes
 notes.get("/", (req, res) => {
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
-// POST route for saving a note
 notes.post("/", (req, res) => {
   const { title, text } = req.body;
 
@@ -20,14 +18,12 @@ notes.post("/", (req, res) => {
     readAndAppend(newNote, "./db/db.json");
 
     const response = {
-      status: "success",
+      status: "Response is a success!",
       body: newNote,
     };
 
     res.json(response);
   }
 });
-
-// TODO: DELETE route for deleting a note
 
 module.exports = notes;

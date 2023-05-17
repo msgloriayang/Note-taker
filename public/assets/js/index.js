@@ -1,15 +1,15 @@
+let newBtn;
 let noteTitle;
+let saveBtn;
 let noteText;
-let saveNoteBtn;
-let newNoteBtn;
-let noteList;
+let noteList
 
 if (window.location.pathname === '/notes.html') {
-  noteTitle = document.querySelector('.note-title');
-  noteText = document.querySelector('.note-textarea');
-  saveNoteBtn = document.querySelector('.save-note');
-  newNoteBtn = document.querySelector('.new-note');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  newBtn = document.querySelector('.newBtn');
+  noteTitle = document.querySelector('.noteTitle');
+  saveBtn = document.querySelector('.saveBtn');
+  noteText = document.querySelector('.noteTextbox');
+  noteList = document.querySelectorAll('.listContainer');
 }
 
 // Show an element
@@ -20,13 +20,10 @@ const show = (elem) => {
 // Hide an element
 const hide = (elem) => {
   elem.style.display = 'none';
-};
-
-// activeNote is used to keep track of the note in the textarea
-let activeNote = {};
+}
 
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch('/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +31,7 @@ const getNotes = () =>
   });
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+  fetch('/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +40,7 @@ const saveNote = (note) =>
   });
 
 const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
+  fetch(`/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -77,11 +74,6 @@ const handleNoteSave = () => {
   });
 };
 
-// Delete the clicked note
-const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
-  e.stopPropagation();
-
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
@@ -93,7 +85,6 @@ const handleNoteDelete = (e) => {
     getAndRenderNotes();
     renderActiveNote();
   });
-};
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
@@ -155,7 +146,7 @@ const renderNoteList = async (notes) => {
   };
 
   if (jsonNotes.length === 0) {
-    noteListItems.push(createLi('No saved Notes', false));
+    noteListItems.push(createLi('No items saved', false));
   }
 
   jsonNotes.forEach((note) => {
